@@ -1,4 +1,4 @@
-# this is the snappfood app,resturant owner version,
+# this is the snappfood app,resturant owner version,the final project of AP course .
 # it consists of 3 pages which are welcome page,login page and sign up page.its still in progress and not done yet.
 # this version is the one uploaded in quera and no significant changes has been made since may 27,2021;
 # the following is pictures of applications pages:
