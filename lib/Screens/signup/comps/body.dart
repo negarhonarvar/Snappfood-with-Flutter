@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snappfood/Screens/home/homepage.dart';
 import 'package:snappfood/Screens/login/comps/back.dart';
 import 'package:snappfood/Screens/login/loginsc.dart';
 import 'package:snappfood/cursorchanger/alreadysignedupcheck.dart';
@@ -25,7 +26,7 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             SvgPicture.asset(
               "assets/images/signup_top.png",
-              height: size.height * 0.35,
+              height: size.height * 0.12,
             ),
             RoundedInputField(
               hintText: "Your Phone number",
@@ -44,7 +45,17 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "SIGNUP",
-              press: () {},
+              press: ()
+              {
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+              builder: (context) {
+              return HomeScreen();
+              },
+            ),
+              );
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(

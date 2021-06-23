@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => Container(
                     margin: EdgeInsets.all(5.0),
-                    color: gradiantColor,
+                    color: kTextColor,
                   ),
                   itemCount: 2),
             ),
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
             delegate: SliverChildBuilderDelegate(
                   (context, index) => Container(
                 margin: EdgeInsets.all(5.0),
-                color: gradiantColorlight,
+                color: kTextLightColor,
               ),
             ),
           )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snappfood/Screens/home/homepage.dart';
 import 'package:snappfood/Screens/login/comps/back.dart';
 import 'package:snappfood/Screens/signup/signupsc.dart';
 import 'package:snappfood/cursorchanger/alreadysignedupcheck.dart';
@@ -26,7 +27,7 @@ class Body extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.03),
             SvgPicture.asset(
-              "assets/images/welcome.svg",
+              "assets/images/signup_top.png",
               height: size.height * 0.35,
             ),
             SizedBox(height: size.height * 0.03),
@@ -39,7 +40,16 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "LOGIN",
-              press: () {},
+              press: () {
+                Navigator.push(
+                   context,
+                    MaterialPageRoute(
+                    builder: (context) {
+                    return HomeScreen();
+                                       },
+                          ),
+                      );
+                 },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
