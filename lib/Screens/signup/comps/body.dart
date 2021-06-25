@@ -9,6 +9,7 @@ import 'package:snappfood/cursorchanger/addressfield.dart';
 import 'package:snappfood/cursorchanger/foodcatfield.dart';
 import 'package:snappfood/cursorchanger/passfield.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:snappfood/MainPanel.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -51,7 +52,7 @@ class Body extends StatelessWidget {
               context,
               MaterialPageRoute(
               builder: (context) {
-              return HomeScreen();
+              return MainPanel();
               },
             ),
               );
