@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snappfood/Screens/EditMenu.dart';
 
 class MainPanel extends StatefulWidget {
   @override
@@ -49,11 +50,11 @@ class _MainPanelState extends State<MainPanel> {
                     )
                 ),
                 onTap: () {
-                  /*Navigator.of(context).push(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => EditMenu(),
                     ),
-                  );*/
+                  );
                 },
               ),
 
