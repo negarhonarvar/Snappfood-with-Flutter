@@ -18,7 +18,7 @@ class _EditMenuState extends State<EditMenu> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
@@ -41,14 +41,14 @@ class _EditMenuState extends State<EditMenu> {
                       height: 40,
                       child:Align(
                         alignment: Alignment.center,
-                        child:Text("Pizza",style: TextStyle(color: Colors.grey[700],fontSize: 20),),
+                        child:Text("Drinks",style: TextStyle(color: Colors.grey[700],fontSize: 20),),
                       ),
                     ),
                     Container(
                       height: 40,
                       child:Align(
                         alignment: Alignment.center,
-                        child:Text("Drinks",style: TextStyle(color: Colors.grey[700],fontSize: 20),),
+                        child:Text("Pizza",style: TextStyle(color: Colors.grey[700],fontSize: 20),),
                       ),
                     ),
                     Container(
@@ -58,13 +58,13 @@ class _EditMenuState extends State<EditMenu> {
                         child:Text("Hamburger",style: TextStyle(color: Colors.grey[700],fontSize: 20),),
                       ),
                     ),
-                    Container(
+                    /*Container(
                       height: 40,
                       child:Align(
                         alignment: Alignment.center,
                         child:Text("All",style: TextStyle(color: Colors.grey[700],fontSize: 20),),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
@@ -76,10 +76,10 @@ class _EditMenuState extends State<EditMenu> {
           ),
           body: TabBarView(
             children: [
-              Pizza(EditMenu.list),
               Drinks(EditMenu.list),
+              Pizza(EditMenu.list),
               Hamburger(EditMenu.list),
-              All(EditMenu.list),
+              /*All(EditMenu.list),*/
             ],
           ),
         ),
@@ -150,26 +150,126 @@ class _HamburgerState extends State<Hamburger> {
                               }),
                             ),
                           ),
+                          RichText(
+                            text: TextSpan(
+                              text: "Delete",
+                              style: TextStyle(color: Colors.deepOrangeAccent,fontWeight: FontWeight.bold,fontSize: 15),
+                              recognizer: new TapGestureRecognizer()..onTap = () => setState(() {
+                                print(index);
+                                HamburgerList.getFood().removeAt(index);
+                              }),
+                            ),
+                          ),
                         ]
                     ),
-                    trailing: Expanded(
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
+                    trailing:RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                                 side: BorderSide(color: Colors.deepOrange)),
-                            onPressed: () {},
+                            onPressed: () {
+                              showModalBottomSheet(context: context,
+                                builder: (context)=>Container(
+                                  padding: EdgeInsets.all(15),
+                                  child: Form(
+                                    key: _formKey,
+                                    child: ListView(
+                                      children: [
+                                        TextFormField(
+                                          decoration: InputDecoration(labelText: "Title",
+                                            labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.deepOrange
+                                                )
+                                            ),
+                                          ),
+                                          onSaved: (String value){
+                                            title=value;
+                                          },
+                                          /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+                                              title=HamburgerList.getFood().elementAt(index-1).title;
+                                            }
+                                          },*/
+                                        ),
+                                        TextFormField(
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: 4,
+                                          decoration: InputDecoration(labelText: "Description",
+                                            labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.deepOrange
+                                                )
+                                            ),
+                                          ),
+                                          onSaved: (String value){
+                                            description=value;
+                                          },
+                                          /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+
+                                              *//*return "Required";*//*
+                                            }
+                                          },*/
+                                        ),
+                                        TextFormField(
+                                          decoration: InputDecoration(labelText: "Cost",
+                                            labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.deepOrange
+                                                )
+                                            ),
+                                          ),
+                                          onSaved: (String value){
+                                            cost=value;
+                                          },
+                                          /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+                                              return "Required";
+                                            }
+                                          },*/
+                                        ),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Colors.deepOrange,
+                                            ),
+                                            onPressed: (){
+
+                                              if(_formKey.currentState.validate()){
+                                                setState(() {
+                                                  _formKey.currentState.save();
+                                                  if(title==""){
+                                                    title=HamburgerList.getFood().elementAt(index).title;
+                                                  }
+                                                  if(description==""){
+                                                    description=HamburgerList.getFood().elementAt(index).description;
+                                                  }
+                                                  if(cost==""){
+                                                    cost=HamburgerList.getFood().elementAt(index).cost;
+                                                  }
+                                                  HamburgerList.getFood().elementAt(index).title=title;
+                                                  HamburgerList.getFood().elementAt(index).description=description;
+                                                  HamburgerList.getFood().elementAt(index).cost=cost;
+                                                  /*HamburgerList.add(FoodRe(title,*//*image,*//*description,cost));*/
+                                                });
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                            child: Text("Update")),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                             /*padding: EdgeInsets.all(10.0),*/
                             color: Colors.deepOrange,
                             textColor: Colors.white,
                             child: Text("details",
                                 style: TextStyle(fontSize: 15)),
                           ),
-                        ],
-                      ),
-                    ),
                   ),
                 );
               },
@@ -249,10 +349,24 @@ class _HamburgerState extends State<Hamburger> {
                           primary: Colors.deepOrange,
                         ),
                         onPressed: (){
+                          bool ChecK=true;
                           if(_formKey.currentState.validate()){
                             setState(() {
                               _formKey.currentState.save();
-                              HamburgerList.add(FoodRe(title,/*image,*/description,cost));
+                              for(int i=0;i<HamburgerList.getFood().length;i++){
+                                if(HamburgerList.getFood().elementAt(i).title==title);
+                                {
+                                  HamburgerList.getFood().elementAt(i).title=title;
+                                  HamburgerList.getFood().elementAt(i).description=description;
+                                  HamburgerList.getFood().elementAt(i).cost=cost;
+                                  ChecK=false;
+
+                                }
+                              }
+                              if(ChecK) {
+                                HamburgerList.add(
+                                    FoodRe(title, /*image,*/description, cost));
+                              }
                             });
                             Navigator.pop(context);
                           }
@@ -345,24 +459,115 @@ class _PizzaState extends State<Pizza > {
                           ),
                         ]
                     ),
-                    trailing: Expanded(
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.deepOrange)),
-                            onPressed: () {},
-                            /*padding: EdgeInsets.all(10.0),*/
-                            color: Colors.deepOrange,
-                            textColor: Colors.white,
-                            child: Text("details",
-                                style: TextStyle(fontSize: 15)),
+                    trailing: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.deepOrange)),
+                      onPressed: () {
+                        showModalBottomSheet(context: context,
+                          builder: (context)=>Container(
+                            padding: EdgeInsets.all(15),
+                            child: Form(
+                              key: _formKey,
+                              child: ListView(
+                                children: [
+                                  TextFormField(
+                                    decoration: InputDecoration(labelText: "Title",
+                                      labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.deepOrange
+                                          )
+                                      ),
+                                    ),
+                                    onSaved: (String value){
+                                      title=value;
+                                    },
+                                    /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+                                              title=HamburgerList.getFood().elementAt(index-1).title;
+                                            }
+                                          },*/
+                                  ),
+                                  TextFormField(
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 4,
+                                    decoration: InputDecoration(labelText: "Description",
+                                      labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.deepOrange
+                                          )
+                                      ),
+                                    ),
+                                    onSaved: (String value){
+                                      description=value;
+                                    },
+                                    /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+
+                                              *//*return "Required";*//*
+                                            }
+                                          },*/
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(labelText: "Cost",
+                                      labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.deepOrange
+                                          )
+                                      ),
+                                    ),
+                                    onSaved: (String value){
+                                      cost=value;
+                                    },
+                                    /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+                                              return "Required";
+                                            }
+                                          },*/
+                                  ),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.deepOrange,
+                                      ),
+                                      onPressed: (){
+
+                                        if(_formKey.currentState.validate()){
+                                          setState(() {
+                                            _formKey.currentState.save();
+                                            if(title==""){
+                                              title=PizzaList.getFood().elementAt(index).title;
+                                            }
+                                            if(description==""){
+                                              description=PizzaList.getFood().elementAt(index).description;
+                                            }
+                                            if(cost==""){
+                                              cost=PizzaList.getFood().elementAt(index).cost;
+                                            }
+                                            PizzaList.getFood().elementAt(index).title=title;
+                                            PizzaList.getFood().elementAt(index).description=description;
+                                            PizzaList.getFood().elementAt(index).cost=cost;
+                                            /*HamburgerList.add(FoodRe(title,*//*image,*//*description,cost));*/
+                                          });
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      child: Text("Update")),
+                                ],
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        );
+                      },
+                      /*padding: EdgeInsets.all(10.0),*/
+                      color: Colors.deepOrange,
+                      textColor: Colors.white,
+                      child: Text("details",
+                          style: TextStyle(fontSize: 15)),
                     ),
+
                   ),
                 );
               },
@@ -442,15 +647,43 @@ class _PizzaState extends State<Pizza > {
                           primary: Colors.deepOrange,
                         ),
                         onPressed: (){
+                          bool ChecK=true;
                           if(_formKey.currentState.validate()){
                             setState(() {
                               _formKey.currentState.save();
-                              PizzaList.add(FoodRe(title,/*image,*/description,cost));
+                              for(int i=0;i<PizzaList.getFood().length;i++){
+                                if(PizzaList.getFood().elementAt(i).title==title);
+                                {
+                                  PizzaList.getFood().elementAt(i).title=title;
+                                  PizzaList.getFood().elementAt(i).description=description;
+                                  PizzaList.getFood().elementAt(i).cost=cost;
+                                  ChecK=false;
+
+                                }
+                              }
+                              if(ChecK) {
+                                PizzaList.add(
+                                    FoodRe(title, /*image,*/description, cost));
+                              }
                             });
                             Navigator.pop(context);
                           }
                         },
                         child: Text("ADD")),
+                    /*ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.deepOrange,
+                        ),
+                        onPressed: (){
+                          if(_formKey.currentState.validate()){
+                            setState(() {
+                              _formKey.currentState.save();
+                              PizzaList.add(FoodRe(title,*//*image,*//*description,cost));
+                            });
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Text("ADD")),*/
 
                   ],
                 ),
@@ -538,23 +771,113 @@ class _DrinksState extends State<Drinks > {
                           ),
                         ]
                     ),
-                    trailing: Expanded(
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.deepOrange)),
-                            onPressed: () {},
-                            /*padding: EdgeInsets.all(10.0),*/
-                            color: Colors.deepOrange,
-                            textColor: Colors.white,
-                            child: Text("details",
-                                style: TextStyle(fontSize: 15)),
+                    trailing: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.deepOrange)),
+                      onPressed: () {
+                        showModalBottomSheet(context: context,
+                          builder: (context)=>Container(
+                            padding: EdgeInsets.all(15),
+                            child: Form(
+                              key: _formKey,
+                              child: ListView(
+                                children: [
+                                  TextFormField(
+                                    decoration: InputDecoration(labelText: "Title",
+                                      labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.deepOrange
+                                          )
+                                      ),
+                                    ),
+                                    onSaved: (String value){
+                                      title=value;
+                                    },
+                                    /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+                                              title=HamburgerList.getFood().elementAt(index-1).title;
+                                            }
+                                          },*/
+                                  ),
+                                  TextFormField(
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: 4,
+                                    decoration: InputDecoration(labelText: "Description",
+                                      labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.deepOrange
+                                          )
+                                      ),
+                                    ),
+                                    onSaved: (String value){
+                                      description=value;
+                                    },
+                                    /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+
+                                              *//*return "Required";*//*
+                                            }
+                                          },*/
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(labelText: "Cost",
+                                      labelStyle: (TextStyle(color: Colors.deepOrange)),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.deepOrange
+                                          )
+                                      ),
+                                    ),
+                                    onSaved: (String value){
+                                      cost=value;
+                                    },
+                                    /*validator: (String value){
+                                            if(value.isEmpty || value==null){
+                                              return "Required";
+                                            }
+                                          },*/
+                                  ),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.deepOrange,
+                                      ),
+                                      onPressed: (){
+
+                                        if(_formKey.currentState.validate()){
+                                          setState(() {
+                                            _formKey.currentState.save();
+                                            if(title==""){
+                                              title=DrinksList.getFood().elementAt(index).title;
+                                            }
+                                            if(description==""){
+                                              description=DrinksList.getFood().elementAt(index).description;
+                                            }
+                                            if(cost==""){
+                                              cost=DrinksList.getFood().elementAt(index).cost;
+                                            }
+                                            DrinksList.getFood().elementAt(index).title=title;
+                                            DrinksList.getFood().elementAt(index).description=description;
+                                            DrinksList.getFood().elementAt(index).cost=cost;
+                                            /*HamburgerList.add(FoodRe(title,*//*image,*//*description,cost));*/
+                                          });
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      child: Text("Update")),
+                                ],
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        );
+                      },
+                      /*padding: EdgeInsets.all(10.0),*/
+                      color: Colors.deepOrange,
+                      textColor: Colors.white,
+                      child: Text("details",
+                          style: TextStyle(fontSize: 15)),
                     ),
                   ),
                 );
@@ -635,10 +958,24 @@ class _DrinksState extends State<Drinks > {
                           primary: Colors.deepOrange,
                         ),
                         onPressed: (){
+                          bool ChecK=true;
                           if(_formKey.currentState.validate()){
                             setState(() {
                               _formKey.currentState.save();
-                              DrinksList.add(FoodRe(title,/*image,*/description,cost));
+                              for(int i=0;i<DrinksList.getFood().length;i++){
+                                if(DrinksList.getFood().elementAt(i).title==title);
+                                {
+                                  DrinksList.getFood().elementAt(i).title=title;
+                                  DrinksList.getFood().elementAt(i).description=description;
+                                  DrinksList.getFood().elementAt(i).cost=cost;
+                                  ChecK=false;
+
+                                }
+                              }
+                              if(ChecK) {
+                                DrinksList.add(
+                                    FoodRe(title, /*image,*/description, cost));
+                              }
                             });
                             Navigator.pop(context);
                           }
