@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snappfood/Screens/EditMenu.dart';
+import 'package:snappfood/Screens/Review.dart';
 
 class MainPanel extends StatefulWidget {
   @override
@@ -81,7 +82,13 @@ class _MainPanelState extends State<MainPanel> {
                       ),
                       )
                   ),
-                  onTap: () {}
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Review(),
+                        ),
+                    );
+                  }
               ),
 
             ),
