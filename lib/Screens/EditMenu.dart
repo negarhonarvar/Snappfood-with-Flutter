@@ -70,7 +70,7 @@ class _EditMenuState extends State<EditMenu> {
               ),
             ),
             centerTitle: true,
-            title: Text("SnappFood",style:TextStyle(
+            title: Text("Edit Menu",style:TextStyle(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),),
             backgroundColor: Colors.white,
           ),
