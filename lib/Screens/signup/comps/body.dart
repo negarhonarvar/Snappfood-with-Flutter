@@ -37,10 +37,10 @@ class Body extends StatelessWidget {
               hintText: "Your address",
               onChanged: (value) {},
             ),
-            FoodCategoreyInputField(
+           /* FoodCategoreyInputField(
               hintText: "food category",
               onChanged: (value) {},
-            ),
+            ),*/
             RoundedPasswordField(
               onChanged: (value) {},
             ),

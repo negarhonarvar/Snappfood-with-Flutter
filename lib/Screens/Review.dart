@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:snappfood/logics/User.dart';
 import 'package:snappfood/logics/UserReviews.dart';
 import 'package:snappfood/logics/UserReviewList.dart';
 
