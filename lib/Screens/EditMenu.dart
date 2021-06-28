@@ -87,6 +87,7 @@ class _EditMenuState extends State<EditMenu> {
     );
   }
 }
+
 class Hamburger extends StatefulWidget {
   static List<FoodRe> list;
   Hamburger(List<FoodRe> list){
@@ -134,7 +135,7 @@ class _HamburgerState extends State<Hamburger> {
                           RichText(
                             text:TextSpan(
                               children: <TextSpan>[
-                                TextSpan(text: "Cost:",style: TextStyle(color: Colors.black87),),
+                                TextSpan(text: "Price:",style: TextStyle(color: Colors.black87),),
                                 TextSpan(text: HamburgerList.getFood().elementAt(index).getCost(),style: TextStyle(color: Colors.black54)),
                                 TextSpan(text: " Toman",style: TextStyle(color: Colors.black87),),
                               ],
@@ -214,7 +215,7 @@ class _HamburgerState extends State<Hamburger> {
                                           },*/
                                         ),
                                         TextFormField(
-                                          decoration: InputDecoration(labelText: "Cost",
+                                          decoration: InputDecoration(labelText: "Price",
                                             labelStyle: (TextStyle(color: Colors.deepOrange)),
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -327,7 +328,7 @@ class _HamburgerState extends State<Hamburger> {
                       },
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Cost",
+                      decoration: InputDecoration(labelText: "Price",
                         labelStyle: (TextStyle(color: Colors.deepOrange)),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -511,7 +512,7 @@ class _PizzaState extends State<Pizza > {
                                           },*/
                                   ),
                                   TextFormField(
-                                    decoration: InputDecoration(labelText: "Cost",
+                                    decoration: InputDecoration(labelText: "Price",
                                       labelStyle: (TextStyle(color: Colors.deepOrange)),
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -625,7 +626,7 @@ class _PizzaState extends State<Pizza > {
                       },
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Cost",
+                      decoration: InputDecoration(labelText: "Price",
                         labelStyle: (TextStyle(color: Colors.deepOrange)),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -823,7 +824,7 @@ class _DrinksState extends State<Drinks > {
                                           },*/
                                   ),
                                   TextFormField(
-                                    decoration: InputDecoration(labelText: "Cost",
+                                    decoration: InputDecoration(labelText: "Price",
                                       labelStyle: (TextStyle(color: Colors.deepOrange)),
                                       focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
@@ -936,7 +937,7 @@ class _DrinksState extends State<Drinks > {
                       },
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Cost",
+                      decoration: InputDecoration(labelText: "Price",
                         labelStyle: (TextStyle(color: Colors.deepOrange)),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(

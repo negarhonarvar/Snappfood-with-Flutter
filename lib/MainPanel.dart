@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snappfood/Screens/EditMenu.dart';
 import 'package:snappfood/Screens/Review.dart';
+import 'package:snappfood/Screens/CurrentOrders.dart';
 
 class MainPanel extends StatefulWidget {
   @override
@@ -114,7 +115,8 @@ class _MainPanelState extends State<MainPanel> {
                       ),
                       )
                   ),
-                  onTap: () {}
+                  onTap: () {
+                  }
               ),
 
             ),
@@ -140,7 +142,13 @@ class _MainPanelState extends State<MainPanel> {
                       ),
                       )
                   ),
-                  onTap: () {}
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CurrentOrders(),
+                      ),
+                    );
+                  }
               ),
 
             ),
@@ -159,7 +167,7 @@ class _MainPanelState extends State<MainPanel> {
                           children: <Widget>[
                             Expanded(child: Image.asset("assets/images/area2.png",
                               height: 70, width: 70,),),
-                            Text("Round Area", style: TextStyle(fontSize: 20,
+                            Text("Area", style: TextStyle(fontSize: 20,
                                 fontWeight: FontWeight.bold),),
                             Padding(padding: EdgeInsets.only(bottom: 15),),
                           ]

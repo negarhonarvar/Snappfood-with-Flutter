@@ -1,4 +1,4 @@
-import 'package:snappfood/logics/User.dart';
+
 
 class UserReviews{
   String name;
